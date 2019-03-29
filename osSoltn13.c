@@ -4,8 +4,8 @@
 We use 3 semaphores. Semaphore customers counts waiting customers; semaphore
 barbers is the number of idle barbers (0 or 1); and mutex is used for mutual exclusion. A
 shared data variable customers1 also counts waiting customers. It is a copy of customers.
-But we need it here because we can’t access the value of semaphores directly. We also
-need a semaphore cutting which ensures that the barber won’t cut another customer’s
+But we need it here because we canâ€™t access the value of semaphores directly. We also
+need a semaphore cutting which ensures that the barber wonâ€™t cut another customerâ€™s
 hair before the previous customer leaves.
 // shared data
 semaphore customers = 0;
