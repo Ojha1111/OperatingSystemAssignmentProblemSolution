@@ -1,26 +1,25 @@
 #include<stdio.h> 
- 
-int main() 
-{ 
- 
-  int count,j,r,remain,flag=0; 
-  double time,time_quantum;
-  double wait_time=0,turnaround_time=0,arrivaltime[10],Bursttime[10],rt[10]; 
-  printf("Enter Total Process:\t "); 
-  scanf("%d",&r); 
-  remain=r; 
-  for(count=0;count<r;count++) 
+ int main() 
   { 
-    printf("Enter Arrival Time and Burst Time for  Process Number %d :",count+1); 
-    scanf("%d",&arrivaltime[count]); 
-    scanf("%d",&Bursttime[count]); 
-    rt[count]=Bursttime[count]; 
-  } 
-  printf("Enter Time Quantum:\t"); 
-  scanf("%d",&time_quantum); 
-  printf("\n\nProcess\t|Turnaround Time|Waiting Time\n\n"); 
-  for(time=0,count=0;remain!=0;) 
-  { 
+ 
+     int count,j,r,remain,flag=0; 
+     double time,time_quantum;
+     double wait_time=0,turnaround_time=0,arrivaltime[10],Bursttime[10],rt[10]; 
+     printf("Enter Total Process:\t "); 
+     scanf("%d",&r); 
+     remain=r; 
+     for(count=0;count<r;count++) 
+      { 
+        printf("Enter Arrival Time and Burst Time for  Process Number %d :",count+1); 
+        scanf("%d",&arrivaltime[count]); 
+        scanf("%d",&Bursttime[count]); 
+        rt[count]=Bursttime[count]; 
+      } 
+        printf("Enter Time Quantum:\t"); 
+        scanf("%d",&time_quantum); 
+        printf("\n\nProcess\t|Turnaround Time|Waiting Time\n\n"); 
+    for(time=0,count=0;remain!=0;) 
+     { 
     if(rt[count]<=time_quantum && rt[count]>0) 
     { 
       time+=rt[count]; 
