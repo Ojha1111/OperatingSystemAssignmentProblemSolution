@@ -1,4 +1,4 @@
-//cnt=count
+//cnt=as qa counter
 #include<stdio.h> 
  int main() 
   { 
@@ -14,7 +14,7 @@
         printf("Enter Arrival Time and Burst Time for  Process Number %d :",cnt+1); 
         scanf("%d",&arrivaltime[cnt]); 
         scanf("%d",&Bursttime[cnt]); 
-        rt[count]=Bursttime[cnt]; 
+        rt[cnt]=Bursttime[cnt]; 
       } 
         printf("Enter Time Quantum:\t"); 
         scanf("%d",&time_quantum); 
