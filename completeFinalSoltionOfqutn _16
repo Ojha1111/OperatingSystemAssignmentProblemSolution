@@ -2,57 +2,112 @@
 #include<unistd>
 #include<stdlib.h>
 #include<stdio.h> 
- int main() 
-  { 
- 
-     int cnt,j,u,re,flag=0; 
-     double time,TQ;
-     double WT=0,TAT=0,AT[10],BT[10],rt[10]; 
-     printf("Enter Total Process:\t "); 
-     scanf("%d",&u); 
-     re=u; 
-     for(cnt=0;cnt<u;cnt++) 
-      { 
-        printf("Enter Arrival Time" ,cnt+1); 
-        scanf("%d",&AT[cnt]); 
-        printf("EnterBurst Time for  Process Number %d :",cnt+1); 
-        scanf("%d",&BT[cnt]); 
-        rt[cnt]=BT[cnt]; 
-      } 
-        printf("Enter Time Quantum:\t"); 
-        scanf("%d",&TQ); 
-        printf("\n\nProcess\t|Turnaround Time|Waiting Time\n\n"); 
-    for(time=0,cnt=0;re!=0;) 
-     { 
-    if(rt[cnt]<=TQ && rt[cnt]>0) 
-    { 
-      time+=rt[cnt]; 
-      rt[cnt]=0; 
-      flag=1; 
-    } 
-    else if(rt[cnt]>0) 
-    { 
-      rt[cnt]-=TQ; 
-      time+=TQ; 
-    } 
-    if(rt[cnt]==0 && flag==1) 
-    { 
-      re--; 
-      printf("P[%d]\t|\t%d\t|\t%d\n",cnt+1,time-AT[cnt],time-AT[cnt]-BT[cnt]); 
-      
-      WT+=time-AT[cnt]-BT[cnt]; 
-      TAT+=time-AT[cnt]; 
-      flag=0; 
-    } 
-    if(cnt==u-1) 
-      cnt=0; 
-    else if(AT[cnt+1]<=time) 
-      cnt++; 
-    else 
-      cnt=0; 
-  } 
-  printf("\nAverage Waiting Time= %f\n",WT*1.0/u); 
-  printf("Avg Turnaround Time = %f",TAT*1.0/u); 
+ #include<iostream> 
+using namespace std; 
   
-  return 0; 
-}
+
+void CWT(int p[], int n, 
+             int bt[], int wt[], int Qua) 
+{ 
+
+    int rem_bt[n]; 
+    for (int i = 0 ; i < n ; i++) 
+        rem_bt[i] =  bt[i]; 
+  
+    int t = 0; 
+     while (1) 
+    { 
+        bool done = true; 
+  
+       
+        for (int i = 0 ; i < n; i++) 
+        { 
+         
+            if (rem_bt[i] > 0) 
+            { 
+                done = false;
+  
+                if (rem_bt[i] > Qua) 
+                { 
+                  
+                    t += Qua; 
+  
+                  
+                    rem_bt[i] -= Qua; 
+                } 
+  
+             
+                else
+                { 
+                    
+                    t = t + rem_bt[i]; 
+  
+               
+                    wt[i] = t - bt[i]; 
+  
+                
+                    rem_bt[i] = 0; 
+                } 
+            } 
+        } 
+  
+
+        if (done == true) 
+          break; 
+    } 
+} 
+  
+
+void CTAT(int p[], int n, 
+                        int bt[], int wt[], int tat[]) 
+{ 
+
+    for (int i = 0; i < n ; i++) 
+        tat[i] = bt[i] + wt[i]; 
+} 
+  
+
+void CAVGT(int p[], int n, int bt[], 
+                                     int Qua) 
+{ 
+    int wt[n], tat[n], total_wt = 0, total_tat = 0; 
+  
+  
+    CWT(p, n, bt, wt, Qua); 
+  
+
+    CTAT(p, n, bt, wt, tat); 
+  
+
+    cout << "Processes "<< " Burst time "
+         << " Waiting time " << " Turn around time\n"; 
+  
+
+    for (int i=0; i<n; i++) 
+    { 
+        total_wt = total_wt + wt[i]; 
+        total_tat = total_tat + tat[i]; 
+        cout << " " << i+1 << "\t\t" << bt[i] <<"\t "
+             << wt[i] <<"\t\t " << tat[i] <<endl; 
+    } 
+  
+    cout << "Average waiting time = "
+         << (float)total_wt / (float)n; 
+    cout << "\nAverage turn around time = "
+         << (float)total_tat / (float)n; 
+} 
+  
+
+int main() 
+{ 
+
+    int p[] = { 1, 2, 3,4,5,6,7,8,9,10}; 
+    int n = sizeof p / sizeof p[0]; 
+  
+
+    int burst_time[] = {10, 5, 8,7,12,44,23,20,14,33}; 
+
+    int Qua = 3; 
+    CAVGT(p, n, burst_time, Qua); 
+    return 0; 
+} 
