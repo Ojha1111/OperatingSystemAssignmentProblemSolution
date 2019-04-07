@@ -1,64 +1,42 @@
 #include<unistd>
 #include<stdlib.h>
 #include<stdio.h> 
- #include<iostream> 
+#include<iostream> 
 using namespace std; 
-  
-
-void CWT(int p[], int n, 
-             int bt[], int wt[], int Qua) 
+ void CWT(int p[], int n, int bt[], int wt[], int Qua) 
 { 
-
-    int rem_bt[n]; 
-    for (int i = 0 ; i < n ; i++) 
-        rem_bt[i] =  bt[i]; 
-  
+int rem_bt[n]; 
+ for (int i = 0 ; i < n ; i++) 
+     rem_bt[i] =  bt[i]; 
     int t = 0; 
      while (1) 
     { 
         bool done = true; 
-  
-       
         for (int i = 0 ; i < n; i++) 
         { 
-         
-            if (rem_bt[i] > 0) 
+          if (rem_bt[i] > 0) 
             { 
                 done = false;
-  
-                if (rem_bt[i] > Qua) 
-                { 
-                  
+                 if (rem_bt[i] > Qua) 
+                   { 
                     t += Qua; 
-  
-                  
                     rem_bt[i] -= Qua; 
-                } 
-  
-             
-                else
-                { 
-                    
-                    t = t + rem_bt[i]; 
-  
-               
+                    } 
+                  else
+                 { 
+                   t = t + rem_bt[i]; 
                     wt[i] = t - bt[i]; 
-  
-                
                     rem_bt[i] = 0; 
                 } 
             } 
         } 
-  
-
-        if (done == true) 
+              if (done == true) 
           break; 
     } 
 } 
   
 
-void CTAT(int p[], int n, 
-                        int bt[], int wt[], int tat[]) 
+void CTAT(int p[], int n,  int bt[], int wt[], int tat[]) 
 { 
 
     for (int i = 0; i < n ; i++) 
@@ -66,23 +44,13 @@ void CTAT(int p[], int n,
 } 
   
 
-void CAVGT(int p[], int n, int bt[], 
-                                     int Qua) 
+void CAVGT(int p[], int n, int bt[],  int Qua) 
 { 
     int wt[n], tat[n], total_wt = 0, total_tat = 0; 
-  
-  
-    CWT(p, n, bt, wt, Qua); 
-  
-
-    CTAT(p, n, bt, wt, tat); 
-  
-
-    cout << "Processes "<< " Burst time "
-         << " Waiting time " << " Turn around time\n"; 
-  
-
-    for (int i=0; i<n; i++) 
+     CWT(p, n, bt, wt, Qua); 
+     CTAT(p, n, bt, wt, tat); 
+      cout << "Processes "<< " Burst time " << " Waiting time " << " Turn around time\n"; 
+     for (int i=0; i<n; i++) 
     { 
         total_wt = total_wt + wt[i]; 
         total_tat = total_tat + tat[i]; 
@@ -90,10 +58,8 @@ void CAVGT(int p[], int n, int bt[],
              << wt[i] <<"\t\t " << tat[i] <<endl; 
     } 
   
-    cout << "Average waiting time = "
-         << (float)total_wt / (float)n; 
-    cout << "\nAverage turn around time = "
-         << (float)total_tat / (float)n; 
+    cout << "Average waiting time = "<< (float)total_wt / (float)n; 
+    cout << "\nAverage turn around time = "<< (float)total_tat / (float)n; 
 } 
   
 
