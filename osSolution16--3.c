@@ -33,7 +33,7 @@
       rt[cnt]=0; 
       flag=1; 
     } 
-    else if(rt[cnt]>0) 
+    else if (rt[cnt]>0) 
     { 
       rt[cnt]-=TQ; 
       time+=TQ; 
